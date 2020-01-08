@@ -4,6 +4,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 	<distributable id="nippo" />
 
+	<filter>
+    	<filter-name>CrossRequestFilter</filter-name>
+    	<filter-class>com.nittsu.nippo.filter.CrossRequestFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+    	<filter-name>CrossRequestFilter</filter-name>
+    	<url-pattern>*</url-pattern>
+    </filter-mapping>
+
     <error-page>
         <location>/index.html</location>
     </error-page>
