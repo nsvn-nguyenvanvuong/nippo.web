@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "target": "ES2019",
+    "sourceMap": true,
+    "skipDefaultLibCheck": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "types": [
+      "webpack-env"
+    ],
+    "baseUrl": "ClientApp",
+    "paths": {
+      "core": [
+        "core/*"
+      ],
+      "views": [
+        "views/*"
+      ]
+    }
+  },
+  "exclude": [
+    "bin",
+    "node_modules"
+  ]
+}
