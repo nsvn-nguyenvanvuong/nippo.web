@@ -3,7 +3,7 @@
 
 #ignore project build folders
 **/build/**
-**/bin*
+**/bin/**
 
 #ignore node_modules
 **/node_modules*
