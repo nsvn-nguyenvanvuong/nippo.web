@@ -1,2 +1,48 @@
 
-.DS_Store
+**/.DS_Store
+
+#ignore project build folders
+**/build*
+**/bin*
+
+#ignore node_modules
+**/node_modules*
+
+#ignore gradle cache folder
+**/.gradle*
+**/.nb-gradle*
+**/.settings*
+**/.ide*
+
+#ignore spotlight cache
+**/.DS_Store
+
+#ignore sass-cache folder
+**/.sass-cache*
+
+**/.metadata*
+**/.recommenders*
+**/taskArtifacts*
+
+#ignore all gradle project files
+*.classpath
+*.project
+*.launch
+*.class
+*.orig
+
+#ignore all js, map file
+**/*.js*
+!**/*.json
+
+# add ignore file of mobile project
+**/client/**/node_modules/*
+**/client/**/vendor*
+**/client/**/bundles*
+**/client/**/main-server*
+**/client/**/wwwroot/*
+**/client/databases/*
+
+!**/client/**/srv/**/*.js
+
+**/server/src/main/webapp/*
