@@ -24,6 +24,8 @@
 **/.recommenders*
 **/taskArtifacts*
 
+**/.gitignore
+
 #ignore all gradle project files
 *.classpath
 *.project

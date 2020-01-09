@@ -9,6 +9,8 @@
 // Add content to be applied to all projects here
 allprojects {
 	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'eclipse-wtp'
 	
 	// Specify run-time character code of compileJava and compileTestJava with unicode
 	[compileJava, compileTestJava]*.options*.encoding = "UTF-8"
