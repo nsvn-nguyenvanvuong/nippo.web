@@ -8,4 +8,4 @@ import 'core/index';
 
 import { App } from 'core/index';
 
-App.applyBindings('home', 'not-found');
+App.start('home', 'not-found');

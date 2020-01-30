@@ -9,18 +9,18 @@ ko.components.register('home', {
     }
 });
 
+router.register('home', '/home');
+
 class RootApp {
     public router: IRouter = router;
 
-    applyBindings(home?: string, notFound?: string) {
+    start(home?: string, notFound?: string) {
         const vm = this
             , view = document.createElement('div');
 
         view.setAttribute('data-bind', `{ component: router, params: router.params }`);
 
         document.body.prepend(view);
-
-        vm.router.register('home', '/home');
 
         vm.router.set(home, notFound);
 
@@ -29,6 +29,3 @@ class RootApp {
 }
 
 export const App = new RootApp();
-
-
-Object.assign(window, { ko, App });
