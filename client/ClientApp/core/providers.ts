@@ -4,8 +4,8 @@ import * as ko from 'knockout';
 
 import * as moment from 'moment';
 
-import router from "ko.ts/build/routing";
+// import router from "ko.ts/build/routing";
 
-export { _, $, ko, router, moment };
+export { _, $, ko, moment };
 
-export * from 'ko.ts';
+// export * from 'ko.ts';

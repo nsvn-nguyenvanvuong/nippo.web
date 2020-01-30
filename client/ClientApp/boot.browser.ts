@@ -4,8 +4,8 @@ import 'popper.js';
 import 'bootstrap';
 
 import 'core/index';
-import 'views/index';
+// import 'views/index';
 
-import { App } from 'core/providers';
+import { App } from 'core/index';
 
-new App().start();
+App.applyBindings('home', 'not-found');

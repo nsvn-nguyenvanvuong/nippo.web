@@ -30,6 +30,10 @@ module.exports = (env) => {
         },
         entry: {
             bundles: [
+                'lodash',
+                'moment',
+                'knockout',
+                'jquery',
                 './ClientApp/index.html',
                 './ClientApp/boot.browser.ts',
                 './ClientApp/styles/dashboard.scss'
@@ -102,10 +106,10 @@ module.exports = (env) => {
                 chunkFilename: '[id].css',
 
             }),
-            new webpack.DllReferencePlugin({
+            /*new webpack.DllReferencePlugin({
                 context: __dirname,
                 manifest: require('./wwwroot/dist/vendor-manifest.json')
-            }),
+            }),*/
             // Plugins that apply in development builds only
             new webpack.SourceMapDevToolPlugin({
                 // Remove this line if you prefer inline source maps
