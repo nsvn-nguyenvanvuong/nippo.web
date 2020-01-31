@@ -1,6 +1,6 @@
-import { $, ko } from 'core/providers';
+import { ko } from 'core/providers';
+import { component } from 'core/decorators';
 import { ViewModel } from 'core/apps/viewmodel';
-import { component } from 'core/decorators/component';
 
 @component({
     name: "profile",
