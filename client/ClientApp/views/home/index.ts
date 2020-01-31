@@ -1,8 +1,10 @@
-import { $, ko, View, ViewModel } from 'core/providers';
+import { $, ko } from 'core/providers';
+import { ViewModel } from 'core/apps/viewmodel';
+import { component } from 'core/decorators/component';
 
-@View({
+@component({
     name: "home",
-    route: "/",
+    url: '/home',
     title: "Home page",
     template: require("./index.html").default
 })
@@ -12,17 +14,23 @@ export class HomeViewModel extends ViewModel {
     number = ko.observable(100);
     date = ko.observable(new Date());
 
-    onInit() {
-        $.ajax({
-            url: 'https://jsonplaceholder.typicode.com/posts/42',
+    created() {
+        console.log('created');
+
+        this.fetch('https://jsonplaceholder.typicode.com/posts/42', {
             method: 'GET',
             dataType: 'JSON',
-            data: {
-
-            }
+            data: {}
+        }).then((value) => {
+            console.log(value);
         })
-            .then((value) => {
-                console.log(value);
-            })
+    }
+
+    mounted() {
+        console.log('mounted');
+    }
+
+    destroyed() {
+        console.log('destroyed');
     }
 }
