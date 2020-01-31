@@ -1,8 +1,6 @@
 import { ko } from 'core/providers';
 import { router, params } from 'core/apps/route';
 
-router.register('home', '/home/:id?');
-
 class RootViewModel {
     public router: IRouter = router;
     public params: Observable<IParams | null> = params;
@@ -48,6 +46,8 @@ class RootViewModel {
                 (document.querySelector(element) || document.createElement('div')) :
                 (element instanceof HTMLElement ? element : document.createElement('div'));
 
+        vm.router.bootstrap();
+
         if (!view.getAttribute('class')) {
             view.setAttribute('class', 'container-fluid');
         }
@@ -58,9 +58,7 @@ class RootViewModel {
             body.prepend(view);
         }
 
-        vm.router.bootstrap();
-
-        setTimeout(() => ko.applyBindings(vm, document.body), 0);
+        setTimeout(() => ko.applyBindings(vm, document.body), 1);
     }
 }
 

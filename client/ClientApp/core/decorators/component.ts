@@ -1,6 +1,11 @@
 import { ko } from 'core/providers';
+import { router } from 'core/apps/route';
 
 export function component(params: IDecoratorComponent) {
+    if (!!params.url) {
+        router.register(params.name, params.url);
+    }
+
     return function (constructor: ComponentConstructor) {
         ko.components.register(params.name, {
             synchronous: false,

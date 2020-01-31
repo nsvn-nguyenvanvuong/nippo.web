@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import 'popper.js';
 import 'bootstrap';
 
@@ -11,4 +9,4 @@ import { RootApp } from 'core/apps/root';
 RootApp
     .home('home')
     .page404('page-404')
-    .applyBindings(document.querySelector('#root'));
+    .applyBindings('#root');
