@@ -8,6 +8,7 @@ const a = Object.assign
         page404: '',
         params: ko.observable(null)
     }
+    , title = ko.observable('')
     , router: IRouter = ko.observable('') as any
     , path2RegExp = function (path: string | string[]) {
         if (path instanceof Array) {
@@ -105,6 +106,10 @@ d(router, 'goto', {
             location.hash = `/${tokens.filter((r: string) => !!r).join('/')}`.replace(/\/+/g, '/');
         }
     }
+});
+
+d(router, 'title', {
+    value: title
 });
 
 d(router, 'register', {

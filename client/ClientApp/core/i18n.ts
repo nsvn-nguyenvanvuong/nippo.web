@@ -6,19 +6,23 @@ const lang = ko.observable('vi')
         vi: {
             'vi': 'Tiếng Việt',
             'en': 'English',
-            'abc': 'Xin chaof'
+            'abc': 'Xin chaof',
+            'profile': 'Hồ sơ',
+            'home': 'Trang chủ'
         },
         en: {
             'vi': 'Tiếng Việt',
             'en': 'English',
-            'abc': 'hello'
+            'abc': 'hello',
+            'profile': 'Profile',
+            'home': 'Home'
         }
     };
 
 @handler({
     bindingName: 'i18n'
 })
-export class I18nBinding {
+export class I18nBinding implements ko.BindingHandler {
     init(el: HTMLElement, accessor: () => ko.BindingAccessors | string) {
         ko.computed({
             read() {
@@ -31,6 +35,7 @@ export class I18nBinding {
         });
     }
 }
+
 
 @component({
     name: "languages",

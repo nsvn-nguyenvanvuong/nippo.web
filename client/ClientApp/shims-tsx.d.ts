@@ -32,14 +32,15 @@ declare global {
     }
 
     interface IRouter extends Observable<string> {
-        bootstrap: () => void;
-        home: (name: string) => IRouter;
-        page404: (name: string) => IRouter;
-        register: (name: string, url: string) => void;
-        goto: {
+        readonly bootstrap: () => void;
+        readonly home: (name: string) => IRouter;
+        readonly page404: (name: string) => IRouter;
+        readonly register: (name: string, url: string) => void;
+        readonly goto: {
             (nameOrUrl: string): void;
             (nameOrUrl: string, params: IParams): void;
         };
+        readonly title: Observable<string>;
     }
 
     interface IGoto {
