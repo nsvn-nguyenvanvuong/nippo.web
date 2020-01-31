@@ -44,6 +44,7 @@ export class LanguagesComponent {
     public changeLg(lg: string) {
         this.lg(lg);
     }
+
     public isChecked(lg: string) {
         return ko.toJS(this.lg) === ko.toJS(lg);
     }
