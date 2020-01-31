@@ -7,13 +7,13 @@ export function component(params: IDecoratorComponent) {
     }
 
     return function (constructor: ComponentConstructor) {
+        const vm: any = new constructor();
+
         ko.components.register(params.name, {
             synchronous: false,
             template: params.template,
             viewModel: {
                 createViewModel: (params: any, elementRef: ElementRef) => {
-                    const vm = new constructor(params, elementRef.element);
-
                     if (typeof vm.created === 'function') {
                         vm.created.apply(vm, [params, elementRef.element]);
                     }
@@ -36,5 +36,7 @@ export function component(params: IDecoratorComponent) {
                 }
             }
         });
+
+        return vm;
     }
 }

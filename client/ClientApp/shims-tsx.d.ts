@@ -75,7 +75,7 @@ declare global {
     }
 
     interface ComponentConstructor {
-        new(params: any, element: HTMLElement): any;
+        new(): any;
     }
 
     interface ElementRef {
