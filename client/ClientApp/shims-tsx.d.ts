@@ -53,22 +53,17 @@ declare global {
         (url: string, settings?: JQuery.AjaxSettings): JQuery.jqXHR;
     }
 
-    interface IBindingParams {
+    interface IBindingOption {
         virtual?: boolean;
         bindingName: string;
         validatable?: boolean;
-        resources?: {
-            [lang: string]: {
-                [key: string]: string;
-            }
-        }
     }
 
     interface BindingConstructor {
         new(): any;
     }
 
-    interface IDecoratorComponent {
+    interface IComponentOption {
         url?: string;
         title?: string;
         name: string;

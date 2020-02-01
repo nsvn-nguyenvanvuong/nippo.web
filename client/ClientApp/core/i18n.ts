@@ -67,7 +67,6 @@ export class I18nBinding implements ko.BindingHandler {
     }
 }
 
-
 @component({
     name: "languages",
     template: `<div class="btn-group" data-bind="foreach: languages"><button class="btn" data-bind="click: $parent.changeLg($data), i18n: $data, css: { 'btn-primary': $parent.isChecked($data), 'btn-secondary': !$parent.isChecked($data) }"></button></div>`

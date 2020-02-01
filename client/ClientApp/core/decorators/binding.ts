@@ -1,10 +1,7 @@
 import { ko } from 'core/providers';
 
-export function handler(params: IBindingParams) {
+export function handler(params: IBindingOption) {
     return function (constructor: BindingConstructor) {
-        // merge resources
-        // ko.utils.merge(i18n, params.resources);
-
         ko.bindingHandlers[params.bindingName] = new constructor();
         ko.virtualElements.allowedBindings[params.bindingName] = !!params.virtual;
 

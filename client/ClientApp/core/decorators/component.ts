@@ -1,7 +1,7 @@
 import { ko } from 'core/providers';
 import { router } from 'core/apps/route';
 
-export function component(params: IDecoratorComponent) {
+export function component(params: IComponentOption) {
     const resource = !!params.url ? (params.title || params.name) : null;
 
     if (!!params.url) {
@@ -15,8 +15,6 @@ export function component(params: IDecoratorComponent) {
                 createViewModel: (params: any, elementRef: ElementRef) => {
                     const vm = new constructor()
                         , $disposed = vm.dispose;
-
-                    Object.defineProperty(vm, '$el', { value: elementRef.element });
 
                     if (resource) {
                         router.title(resource);
@@ -48,6 +46,8 @@ export function component(params: IDecoratorComponent) {
                             }
                         }
                     });
+
+                    Object.defineProperty(vm, '$el', { value: elementRef.element });
 
                     return vm;
                 }
