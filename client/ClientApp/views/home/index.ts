@@ -26,6 +26,14 @@ export class HomeViewModel extends ViewModel {
 
     dispose = ko.observable('');
 
+    times: ObservableArray<number> = ko.observableArray();
+
+    clickTime() {
+        const vm = this;
+
+        vm.times.push(new Date().getTime());
+    }
+
     created() {
         this.fetch('https://jsonplaceholder.typicode.com/posts/42', {
             method: 'GET',
