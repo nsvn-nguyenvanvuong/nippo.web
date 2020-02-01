@@ -2,6 +2,16 @@ import { _, ko } from 'core/providers';
 import { lang, langs, resources } from 'core/configs';
 import { handler, component } from 'core/decorators';
 
+import { storage } from 'core/storage';
+
+const LK = 'lang';
+
+if (storage.local.hasItem(LK)) {
+    lang(storage.local.getItem(LK));
+}
+
+lang.subscribe((l: string) => storage.local.setItem(LK, l));
+
 function i18n(resources: IResource, resource: string | number, params?: string | string[] | { [key: string]: string }): string {
     const groups: { [key: string]: string } = {}
         , regex: RegExp = /{\d+}|#{[^}]+}|{#[^}]+}/g;
