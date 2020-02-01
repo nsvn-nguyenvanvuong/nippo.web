@@ -1,3 +1,3 @@
-import './api';
-import './i18n';
+import './plugins/api';
+import './plugins/i18n';
 import './controls';

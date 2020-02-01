@@ -1,7 +1,7 @@
 import { ko } from 'core/providers';
 
-import vi from '../resources/vietnam.json';
-import en from '../resources/english.json';
+import vi from '../../resources/vietnam.json';
+import en from '../../resources/english.json';
 
 const lang: Observable<string> = ko.observable('vi')
     , langs: ObservableArray<string> = ko.observableArray([''])

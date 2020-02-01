@@ -1,7 +1,7 @@
 import { ko } from 'core/providers';
 import { router } from 'core/apps/route';
 
-import { $const, updateResouces } from 'core/configs';
+import { $const, updateResouces } from 'core/plugins/configs';
 
 export function component(params: IComponentOption) {
     const { url, name, resources } = params

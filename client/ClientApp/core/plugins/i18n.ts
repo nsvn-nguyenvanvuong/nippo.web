@@ -1,5 +1,5 @@
 import { _, ko } from 'core/providers';
-import { lang, langs, resources } from 'core/configs';
+import { lang, langs, resources } from 'core/plugins/configs';
 import { handler, component } from 'core/decorators';
 
 import { storage } from 'core/storage';

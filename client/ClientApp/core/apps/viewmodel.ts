@@ -1,7 +1,7 @@
 import { $ } from 'core/providers';
 import { router } from 'core/apps/route';
 
-import { $const } from 'core/configs';
+import { $const } from 'core/plugins/configs';
 
 const d = document
     , c = d.createElement;
