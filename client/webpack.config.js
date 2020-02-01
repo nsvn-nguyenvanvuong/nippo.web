@@ -17,11 +17,9 @@ module.exports = (env) => ({
     module: {
         rules: [
             { test: /\.html$/, loaders: ['raw-loader'] },
-            { test: /\.(css|txt|md)$/, loaders: ['raw-loader'] },
             { test: /\.ts$/, include: /ClientApp/, loaders: ['ts-loader'] },
             { test: /\.(png|jpg|jpeg|gif|svg)$/, loaders: ['url-loader?limit=100000'] },
-            { test: /\.(sa|sc)ss$/, include: /(views|components)/, loaders: ['raw-loader', 'sass-loader'] },
-            { test: /\.(sa|sc)ss$/, include: /styles/, loaders: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] }
+            { test: /\.s(a|c)ss$/, include: /ClientApp/, loaders: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] }
         ]
     },
     entry: {
@@ -108,6 +106,8 @@ module.exports = (env) => ({
     ],
     devServer: {
         port: 3000,
+        host: '0.0.0.0',
+        useLocalIp: true,
         watchContentBase: true,
         index: './index.htm',
         contentBase: path.join(__dirname, 'wwwroot'),

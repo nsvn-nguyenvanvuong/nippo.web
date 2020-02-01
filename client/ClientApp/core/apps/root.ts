@@ -69,6 +69,8 @@ class RootViewModel extends ViewModel {
                 ko.bindingHandlers.i18n.init.apply(null, [$title, () => router.title, <ko.AllBindings>{}, {}, <ko.BindingContext>{}]);
             }
         }
+
+        return vm;
     }
 }
 

@@ -1,23 +1,31 @@
 import { ko } from 'core/providers';
 import { router } from 'core/apps/route';
 
-export function component(params: IComponentOption) {
-    const resource = !!params.url ? (params.title || params.name) : null;
+import { $const, updateResouces } from 'core/configs';
 
-    if (!!params.url) {
-        router.register(params.name, params.url);
+export function component(params: IComponentOption) {
+    const { url, name, resources } = params
+        , title = !!url ? (params.title || params.name) : null
+        , template  = typeof params.template === 'string' ? params.template : (params.template as any).default;
+
+    if (!!resources) {
+        updateResouces(resources);
+    }
+
+    if (!!url) {
+        router.register(name, url);
     }
 
     return function (constructor: ComponentConstructor) {
         ko.components.register(params.name, {
-            template: params.template,
+            template: `<div role="${params.name}" data-bind="let: { $vm: $data }">${template}</div>`,
             viewModel: {
                 createViewModel: (params: any, elementRef: ElementRef) => {
                     const vm = new constructor()
                         , $disposed = vm.dispose;
 
-                    if (resource) {
-                        router.title(resource);
+                    if (title) {
+                        router.title(title);
                     }
 
                     if (typeof vm.created === 'function') {
@@ -46,6 +54,8 @@ export function component(params: IComponentOption) {
                             }
                         }
                     });
+
+                    Object.defineProperty(vm, '$const', { value: $const });
 
                     Object.defineProperty(vm, '$el', { value: elementRef.element });
 

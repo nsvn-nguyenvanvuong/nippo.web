@@ -5,7 +5,7 @@ import { ViewModel } from 'core/apps/viewmodel';
 @component({
     name: "profile",
     url: '/profile/:name?',
-    template: require("./index.html").default
+    template: require("./index.html")
 })
 export class ProfileViewModel extends ViewModel {
     name: Observable<string> = ko.observable('');

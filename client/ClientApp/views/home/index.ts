@@ -6,7 +6,17 @@ import { ViewModel } from 'core/apps/viewmodel';
     name: "home",
     url: '/home',
     title: "home",
-    template: require("./index.html").default
+    template: require('./index.html'),
+    resources: {
+        en: {
+            'home': 'Home',
+            'abc': 'Hello'
+        },
+        vi: {
+            'home': 'Trang chu',
+            'abc': 'Xin chao'
+        }
+    }
 })
 export class HomeViewModel extends ViewModel {
     name = ko.observable('Hello world!');
@@ -22,5 +32,17 @@ export class HomeViewModel extends ViewModel {
             dataType: 'JSON',
             data: {}
         });
+
+        Object.assign(window, { vm: this });
+
+        // console.log('created');
+    }
+
+    mounted() {
+        // console.log('mounted');
+    }
+
+    destroyed() {
+        // console.log('destroyed');
     }
 }

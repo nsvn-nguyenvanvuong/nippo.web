@@ -3,6 +3,11 @@ import {
     ObservableArray as _ObservableArray
 } from 'knockout';
 
+declare module "*.json" {
+    const value: IResources;
+    export default value;
+}
+
 declare global {
     interface Observable<T> extends _Observable<T> {
     }
@@ -68,6 +73,7 @@ declare global {
         title?: string;
         name: string;
         template: string;
+        resources?: IResources;
     }
 
     interface ComponentConstructor {
@@ -77,5 +83,19 @@ declare global {
     interface ElementRef {
         element: HTMLElement,
         templateNodes: Array<HTMLElement>
+    }
+
+    interface IConfigs {
+        readonly lang: ko.Computed<string>;
+        readonly invalid: Symbol;
+        readonly startTime: number;
+    }
+
+    interface IResources {
+        [lg: string]: IResource;
+    }
+
+    interface IResource {
+        [key: string]: string;
     }
 }

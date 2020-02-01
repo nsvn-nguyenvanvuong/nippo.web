@@ -4,8 +4,10 @@
     "moduleResolution": "Node",
     "target": "ESNext",
     "sourceMap": true,
+    "resolveJsonModule": true,
     "skipDefaultLibCheck": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "types": [
       "webpack-env"
