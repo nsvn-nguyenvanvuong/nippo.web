@@ -19,7 +19,7 @@ export class SafeClickBindingHandler implements ko.BindingHandler {
                     const currentPreventTime: number = new Date().getTime()
                         , time: number = currentPreventTime - lastPreventTime
                         , timeClick: number | undefined = allBindingsAccessor.get('timeClick')
-                        , $timeClick: number = typeof timeClick === 'number' && !isNaN(time) ? timeClick : 500;
+                        , $timeClick: number = typeof timeClick === 'number' && !isNaN(time) ? timeClick : 0;
 
                     if (time > $timeClick) {
                         //pass through the arguments
