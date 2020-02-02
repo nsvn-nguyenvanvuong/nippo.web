@@ -1,9 +1,16 @@
 import { _, $, ko, moment } from 'core/providers';
 
+import { handler } from 'core/decorators';
+
 const FORMAT = 'YYYY-MM-DD';
 
-ko.bindingHandlers.date = {
-    init: function (element: HTMLElement, valueAccessor: () => ko.Observable<Date>, allBindings: ko.AllBindings, viewModel: any, bindingContext: ko.BindingContext) {
+@handler({
+    virtual: false,
+    validatable: true,
+    bindingName: 'date'
+})
+export class DateBindingHandler implements ko.BindingHandler {
+    init(element: HTMLElement, valueAccessor: () => ko.Observable<Date>, allBindings: ko.AllBindings, viewModel: any, bindingContext: ko.BindingContext) {
         const accessor = valueAccessor()
             , $dateElement = $(element);
 
@@ -16,8 +23,13 @@ ko.bindingHandlers.date = {
     }
 }
 
-ko.bindingHandlers.dateInput = {
-    init: function (element: HTMLInputElement, valueAccessor: () => ko.Observable<Date>, allBindings: ko.AllBindings, viewModel: any, bindingContext: ko.BindingContext) {
+@handler({
+    virtual: false,
+    validatable: true,
+    bindingName: 'dateInput'
+})
+export class DateInputBindingHandler implements ko.BindingHandler {
+    init(element: HTMLInputElement, valueAccessor: () => ko.Observable<Date>, allBindings: ko.AllBindings, viewModel: any, bindingContext: ko.BindingContext) {
         const accessor = valueAccessor()
             , $dateInput = $(element);
 
@@ -42,4 +54,4 @@ ko.bindingHandlers.dateInput = {
             accessor.subscribe((v: Date) => $dateInput.val(moment(v).format(FORMAT)));
         }
     }
-};
+}

@@ -1,8 +1,14 @@
 import { _, $, ko } from 'core/providers';
 
+import { handler } from 'core/decorators';
 
-ko.bindingHandlers.label = {
-    init: function (element: HTMLElement, valueAccessor: () => ko.Observable<string>) {
+@handler({
+    virtual: false,
+    validatable: true,
+    bindingName: 'label'
+})
+export class LabelBindingHandler implements ko.BindingHandler {
+    init(element: HTMLElement, valueAccessor: () => ko.Observable<string>) {
         const accessor = valueAccessor()
             , $labelElement = $(element);
 

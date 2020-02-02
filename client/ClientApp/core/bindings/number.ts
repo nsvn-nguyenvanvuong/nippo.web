@@ -1,7 +1,14 @@
 import { _, $, ko } from 'core/providers';
 
-ko.bindingHandlers.numberInput = {
-    init: function (element: HTMLInputElement, valueAccessor: () => ko.Observable<number>, allBindings: ko.AllBindings, viewModel: any, bindingContext: ko.BindingContext) {
+import { handler } from 'core/decorators';
+
+@handler({
+    virtual: false,
+    validatable: true,
+    bindingName: 'numberInput'
+})
+export class NumberInputBindingHandler implements ko.BindingHandler {
+    init(element: HTMLInputElement, valueAccessor: () => ko.Observable<number>, allBindings: ko.AllBindings, viewModel: any, bindingContext: ko.BindingContext) {
         const accessor = valueAccessor()
             , $numberInput = $(element);
 
@@ -26,4 +33,4 @@ ko.bindingHandlers.numberInput = {
             accessor.subscribe((v: number) => $numberInput.val(v));
         }
     }
-};
+}

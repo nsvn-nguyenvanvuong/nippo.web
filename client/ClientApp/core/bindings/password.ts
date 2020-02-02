@@ -1,7 +1,14 @@
 import { _, $, ko } from 'core/providers';
 
-ko.bindingHandlers.passwordInput = {
-    init: function (element: HTMLInputElement, valueAccessor: () => ko.Observable<string>, allBindings: ko.AllBindings, viewModel: any, bindingContext: ko.BindingContext) {
+import { handler } from 'core/decorators';
+
+@handler({
+    virtual: false,
+    validatable: true,
+    bindingName: 'passwordInput'
+})
+export class PasswordInputBindingHandler implements ko.BindingHandler {
+    init(element: HTMLInputElement, valueAccessor: () => ko.Observable<string>, allBindings: ko.AllBindings, viewModel: any, bindingContext: ko.BindingContext) {
         const accessor = valueAccessor()
             , $passwordInput = $(element);
 
@@ -20,4 +27,4 @@ ko.bindingHandlers.passwordInput = {
             accessor.subscribe((v: string) => $passwordInput.val(v));
         }
     }
-};
+}
