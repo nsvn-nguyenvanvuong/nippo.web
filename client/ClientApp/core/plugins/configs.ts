@@ -30,9 +30,17 @@ export function updateResouces($resources: IResources) {
     langs(Object.keys($$resources));
 }
 
-export const $const = Object.create({
-    lang: ko.computed(() => ko.toJS(lang)),
-    langs: ko.computed(() => ko.toJS(langs)),
-    invalid: INVALID,
-    startTime: START_TIME
+export const $const = Object.defineProperties({}, {
+    lang: {
+        value: ko.computed(() => ko.toJS(lang))
+    },
+    langs: {
+        value: ko.computed(() => ko.toJS(langs))
+    },
+    invalid: {
+        value: INVALID
+    },
+    startTime: {
+        value: START_TIME
+    }
 });
