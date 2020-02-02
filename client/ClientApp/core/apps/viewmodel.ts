@@ -1,4 +1,4 @@
-export abstract class ViewModel {
+export abstract class ViewModel implements IViewModel {
     public readonly $fetch!: IFetch;
     public readonly $router!: IGoto;
 

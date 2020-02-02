@@ -98,9 +98,22 @@ declare global {
     interface IResource {
         [key: string]: string;
     }
+
+    interface IViewModel {
+        readonly $el: HTMLElement;
+        readonly $const: IConfigs;
+        readonly $parent: IViewModel;
+        readonly $children: IViewModel[];
+        readonly $valid: boolean;
+        readonly $validate: () => Promise<boolean>;
+    }
 }
 
 declare module 'knockout' {
+    interface ObservableFunctions<T> {
+        readonly vm: IViewModel;
+    }
+
     interface ObservableExtenderOptions<T> {
         logChange: string;
     }

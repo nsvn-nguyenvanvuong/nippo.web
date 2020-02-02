@@ -3,6 +3,11 @@ import { router } from 'core/apps/route';
 import { ViewModel } from 'core/apps/viewmodel';
 import { $const, updateResouces } from 'core/plugins/configs';
 
+
+const TSLTOR = '[data-toggle="tooltip"]'
+    , PSLTOR = '[data-toggle="popover"]'
+    , DSLTOR = '.dropdown [data-toggle="false"]';
+
 export function component(params: IComponentOption) {
     const { url, name, resources } = params
         , title = params.title || params.name
@@ -103,6 +108,14 @@ export function component(params: IComponentOption) {
                                 if (typeof vm.mounted === 'function') {
                                     vm.mounted.apply(vm, [element]);
                                 }
+
+                                // need to be enabled manually [tooltip] & [popover]
+                                setTimeout(() => {
+                                    ($(TSLTOR) as any).tooltip();
+                                    ($(PSLTOR) as any).popover();
+                                }, 100);
+
+                                $(DSLTOR).on('click', (evt: Event) => evt.stopPropagation());
                             }
                         });
                     }
@@ -125,8 +138,15 @@ export function component(params: IComponentOption) {
 
                                 $parent.$children.splice($index, 1);
                             }
+
+
+                            // need to be disable manually [tooltip] & [popover]
+                            ($(TSLTOR) as any).tooltip('dispose');
+                            ($(PSLTOR) as any).popover('dispose');
                         }
                     });
+
+                    ko.tasks.schedule(() => console.log('nextTick'));
 
                     return vm;
                 }
