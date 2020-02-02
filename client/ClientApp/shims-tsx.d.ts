@@ -99,3 +99,9 @@ declare global {
         [key: string]: string;
     }
 }
+
+declare module 'knockout' {
+    interface ObservableExtenderOptions<T> {
+        logChange: string;
+    }
+}

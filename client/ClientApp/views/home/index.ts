@@ -19,7 +19,7 @@ import { ViewModel } from 'core/apps/viewmodel';
     }
 })
 export class HomeViewModel extends ViewModel {
-    name = ko.observable('Hello world!');
+    name = ko.observable('Hello world!').extend({ logChange: 'first name:' });
 
     number = ko.observable(100);
     date = ko.observable(new Date());
@@ -33,7 +33,7 @@ export class HomeViewModel extends ViewModel {
     }
 
     created() {
-        this.fetch('https://jsonplaceholder.typicode.com/posts/42', {
+        this.$fetch('https://jsonplaceholder.typicode.com/posts/42', {
             method: 'GET',
             dataType: 'JSON',
             data: {}
