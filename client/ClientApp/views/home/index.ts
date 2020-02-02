@@ -24,8 +24,6 @@ export class HomeViewModel extends ViewModel {
     number = ko.observable(100);
     date = ko.observable(new Date());
 
-    dispose = ko.observable('');
-
     times: ObservableArray<number> = ko.observableArray();
 
     clickTime() {
@@ -48,6 +46,8 @@ export class HomeViewModel extends ViewModel {
 
     mounted() {
         // console.log('mounted');
+
+        Object.assign(window, { vm: this });
     }
 
     destroyed() {

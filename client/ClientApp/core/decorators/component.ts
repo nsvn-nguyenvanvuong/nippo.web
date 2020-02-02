@@ -1,4 +1,4 @@
-import { ko } from 'core/providers';
+import { $, ko } from 'core/providers';
 import { router } from 'core/apps/route';
 
 import { $const, updateResouces } from 'core/plugins/configs';
@@ -6,7 +6,7 @@ import { $const, updateResouces } from 'core/plugins/configs';
 export function component(params: IComponentOption) {
     const { url, name, resources } = params
         , title = !!url ? (params.title || params.name) : null
-        , template  = typeof params.template === 'string' ? params.template : (params.template as any).default;
+        , template = typeof params.template === 'string' ? params.template : (params.template as any).default;
 
     if (!!resources) {
         updateResouces(resources);
@@ -22,14 +22,26 @@ export function component(params: IComponentOption) {
             viewModel: {
                 createViewModel: (params: any, elementRef: ElementRef) => {
                     const vm = new constructor()
-                        , $disposed = vm.dispose;
+                        , $disposed = vm.dispose
+                        , { element } = elementRef
+                        , $parent = ko.dataFor(element);
 
                     if (title) {
                         router.title(title);
                     }
 
+                    Object.defineProperty(vm, '$el', { value: element });
+
+                    Object.defineProperty(vm, 'fetch', { value: $.ajax });
+
+                    Object.defineProperty(vm, '$const', { value: $const });
+
+                    Object.defineProperty(vm, 'router', { value: router.goto });
+
+                    Object.defineProperty(vm, '$parent', { value: $parent });
+
                     if (typeof vm.created === 'function') {
-                        vm.created.apply(vm, [params, elementRef.element]);
+                        vm.created.apply(vm, [params, element]);
                     }
 
                     if (typeof vm.koDescendantsComplete === 'undefined') {
@@ -54,10 +66,6 @@ export function component(params: IComponentOption) {
                             }
                         }
                     });
-
-                    Object.defineProperty(vm, '$const', { value: $const });
-
-                    Object.defineProperty(vm, '$el', { value: elementRef.element });
 
                     return vm;
                 }
