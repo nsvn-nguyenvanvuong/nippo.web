@@ -15,4 +15,8 @@ export abstract class ViewModel implements IViewModel {
     public readonly $validate!: () => Promise<boolean>;
 
     public readonly $modal!: (name: string, params?: any) => Promise<any>;
+
+    public readonly $forceUpdate!: () => void;
+
+    public readonly $nextTick!: (callback: () => void) => number;
 }

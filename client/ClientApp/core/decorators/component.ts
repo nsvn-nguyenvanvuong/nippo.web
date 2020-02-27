@@ -53,6 +53,10 @@ export function component(params: IComponentOption) {
 
                     Object.defineProperty(vm, '$children', { value: [] });
 
+                    Object.defineProperty(vm, '$nextTick', { value: ko.tasks.schedule });
+
+                    Object.defineProperty(vm, '$forceUpdate', { value: ko.tasks.runEarly });
+
                     if (!!url) {
                         Object.defineProperty(vm, '$errors', { value: [] });
 
@@ -145,8 +149,6 @@ export function component(params: IComponentOption) {
                             ($(PSLTOR) as any).popover('dispose');
                         }
                     });
-
-                    ko.tasks.schedule(() => console.log('nextTick'));
 
                     return vm;
                 }

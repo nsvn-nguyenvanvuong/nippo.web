@@ -27,9 +27,10 @@ export class HomeViewModel extends ViewModel {
     times: ObservableArray<number> = ko.observableArray();
 
     clickTime() {
-        const vm = this;
+        const vm = this
+            , time = Date.now();
 
-        vm.times.push(new Date().getTime());
+        vm.times.push(time);
     }
 
     created() {
