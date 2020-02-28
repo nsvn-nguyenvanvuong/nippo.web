@@ -30,10 +30,7 @@ export function component(params: IComponentOption) {
                     const vm = new constructor()
                         , $disposed = vm.dispose
                         , { element } = elementRef
-                        , $parent: ViewModel = ko.dataFor(element)
-                        , $context = ko.contextFor(element);
-
-                    Object.assign(window, { $context });
+                        , $parent: ViewModel = ko.dataFor(element);
 
                     if (!!url && !element.closest('.modal')) {
                         router.title(title);
