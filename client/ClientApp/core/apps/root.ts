@@ -79,7 +79,7 @@ class RootViewModel extends ViewModel {
 
         Object.defineProperty(vm, '$forceUpdate', { value: ko.tasks.runEarly });
 
-        setTimeout(() => ko.applyBindings(vm, document.body), 1);
+        ko.applyBindings(vm, document.body);
 
         if ($title) {
             if (ko.bindingHandlers.i18n.init) {

@@ -24,13 +24,16 @@ export function component(params: IComponentOption) {
 
     return function (constructor: ComponentConstructor) {
         ko.components.register(params.name, {
-            template: `<div role="${params.name}" data-bind="let: { $vm: $data }">${template}</div>`,
+            template,
             viewModel: {
                 createViewModel: (params: any, elementRef: ElementRef) => {
                     const vm = new constructor()
                         , $disposed = vm.dispose
                         , { element } = elementRef
-                        , $parent: ViewModel = ko.dataFor(element);
+                        , $parent: ViewModel = ko.dataFor(element)
+                        , $context = ko.contextFor(element);
+
+                    Object.assign(window, { $context });
 
                     if (!!url && !element.closest('.modal')) {
                         router.title(title);
@@ -117,10 +120,10 @@ export function component(params: IComponentOption) {
                                 }
 
                                 // need to be enabled manually [tooltip] & [popover]
-                                setTimeout(() => {
-                                    ($(TSLTOR) as any).tooltip();
-                                    ($(PSLTOR) as any).popover();
-                                }, 100);
+                                vm.$nextTick(() => {
+                                    $(TSLTOR).tooltip();
+                                    $(PSLTOR).popover();
+                                });
 
                                 $(DSLTOR).on('click', (evt: Event) => evt.stopPropagation());
 
@@ -129,6 +132,12 @@ export function component(params: IComponentOption) {
                                     .removeAttr('data-bind')
                                     .find('[data-bind]')
                                     .removeAttr('data-bind');
+
+                                if (element.tagName === name.toUpperCase()) {
+                                    if (!element.classList.contains('d-block')) {
+                                        element.classList.add('d-inline-block');
+                                    }
+                                }
                             }
                         });
                     }
@@ -152,10 +161,9 @@ export function component(params: IComponentOption) {
                                 $parent.$children.splice($index, 1);
                             }
 
-
                             // need to be disable manually [tooltip] & [popover]
-                            ($(TSLTOR) as any).tooltip('dispose');
-                            ($(PSLTOR) as any).popover('dispose');
+                            $(TSLTOR).tooltip('dispose');
+                            $(PSLTOR).popover('dispose');
                         }
                     });
 
