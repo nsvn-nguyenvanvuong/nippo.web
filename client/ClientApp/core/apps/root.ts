@@ -1,4 +1,5 @@
-import { ko } from 'core/providers';
+import { $, ko } from 'core/providers';
+import { $const } from 'core/plugins/configs';
 import { ViewModel } from 'core/apps/viewmodel';
 import { router, params } from 'core/apps/route';
 
@@ -61,6 +62,22 @@ class RootViewModel extends ViewModel {
         }
 
         Object.defineProperty(vm, '$el', { value: view });
+
+        Object.defineProperty(vm, '$fetch', { value: $.ajax });
+
+        Object.defineProperty(vm, '$const', { value: $const });
+
+        Object.defineProperty(vm, '$router', { value: router.goto });
+
+        Object.defineProperty(vm, '$root', { value: vm });
+
+        Object.defineProperty(vm, '$parent', { value: vm });
+
+        Object.defineProperty(vm, '$children', { value: [] });
+
+        Object.defineProperty(vm, '$nextTick', { value: ko.tasks.schedule });
+
+        Object.defineProperty(vm, '$forceUpdate', { value: ko.tasks.runEarly });
 
         setTimeout(() => ko.applyBindings(vm, document.body), 1);
 

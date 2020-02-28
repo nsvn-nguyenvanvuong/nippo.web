@@ -1,5 +1,6 @@
 import { $, ko } from 'core/providers';
 import { router } from 'core/apps/route';
+import { RootApp } from 'core/apps/root';
 import { ViewModel } from 'core/apps/viewmodel';
 import { $const, updateResouces } from 'core/plugins/configs';
 
@@ -48,6 +49,8 @@ export function component(params: IComponentOption) {
                     Object.defineProperty(vm, '$const', { value: $const });
 
                     Object.defineProperty(vm, '$router', { value: router.goto });
+
+                    Object.defineProperty(vm, '$root', { value: RootApp });
 
                     Object.defineProperty(vm, '$parent', { value: $parent });
 
@@ -120,6 +123,12 @@ export function component(params: IComponentOption) {
                                 }, 100);
 
                                 $(DSLTOR).on('click', (evt: Event) => evt.stopPropagation());
+
+                                // hide all data-bind of ko
+                                $(element)
+                                    .removeAttr('data-bind')
+                                    .find('[data-bind]')
+                                    .removeAttr('data-bind');
                             }
                         });
                     }

@@ -6,6 +6,8 @@ export abstract class ViewModel implements IViewModel {
 
     public readonly $const!: IConfigs;
 
+    public readonly $root!: ViewModel;
+
     public readonly $parent!: ViewModel;
 
     public readonly $children!: ViewModel[];
