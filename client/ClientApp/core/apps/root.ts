@@ -92,3 +92,29 @@ class RootViewModel extends ViewModel {
 }
 
 export const RootApp = new RootViewModel();
+
+export const ModalApp = {
+    applyBindings(name: string, params: any, config: { size: 'lg' }) {
+        const vm = { name, params }
+            , $el = $('<div>', {
+                'class': 'modal fade',
+                'tabindex': '-1',
+                'html': `<div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" data-bind="i18n: name"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" data-bind="component: { name, params }"></div>
+                    </div>
+                </div>`
+            });
+
+        $el.appendTo(document.body);
+        ko.applyBindings(vm, $el.get(0));
+
+        ko.tasks.schedule(() => $el.modal('show'));
+    }
+};

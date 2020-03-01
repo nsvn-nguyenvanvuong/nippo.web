@@ -1,6 +1,6 @@
 import { $, ko } from 'core/providers';
 import { router } from 'core/apps/route';
-import { RootApp } from 'core/apps/root';
+import { RootApp, ModalApp } from 'core/apps/root';
 import { ViewModel } from 'core/apps/viewmodel';
 import { $const, updateResouces } from 'core/plugins/configs';
 
@@ -98,7 +98,10 @@ export function component(params: IComponentOption) {
 
                     Object.defineProperty(vm, '$modal', {
                         value: function modal(name: string, params?: any) {
-                            return Promise.resolve({});
+                            return new Promise((resolve: (result: any) => void) => {
+                                ModalApp.applyBindings(name, params, { size: 'lg' });
+                                resolve('');
+                            });
                         }
                     });
 
