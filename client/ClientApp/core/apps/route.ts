@@ -1,4 +1,4 @@
-import { ko } from "core/providers";
+import { $, ko } from "core/providers";
 
 const a = Object.assign
     , d = Object.defineProperty
@@ -37,6 +37,8 @@ const a = Object.assign
         } else {
             router.goto(configs.home);
         }
+
+        $('.modal.show').modal('hide');
     };
 
 d(router, 'home', {

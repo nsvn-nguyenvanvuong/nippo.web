@@ -94,27 +94,45 @@ class RootViewModel extends ViewModel {
 export const RootApp = new RootViewModel();
 
 export const ModalApp = {
-    applyBindings(name: string, params: any, config: { size: 'lg' }) {
-        const vm = { name, params }
-            , $el = $('<div>', {
+    applyBindings(name: string, params: any = {}, config: { size: 'lg' }) {
+        return new Promise((resolve: (result?: any) => void) => {
+            const $el = $('<div>', {
                 'class': 'modal fade',
                 'tabindex': '-1',
-                'html': `<div class="modal-dialog" role="document">
+                'html': `<div class="modal-dialog modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" data-bind="i18n: name"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bind="click: function() { $close(); }" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body" data-bind="component: { name, params }"></div>
                     </div>
                 </div>`
-            });
+            })
+                , $vm = {
+                    name,
+                    params,
+                    $close: function () {
+                        const evt = 'hidden.bs.modal';
 
-        $el.appendTo(document.body);
-        ko.applyBindings(vm, $el.get(0));
+                        resolve();
 
-        ko.tasks.schedule(() => $el.modal('show'));
+                        $el.one(evt, () => $el.remove());
+                        ko.tasks.schedule(() => $el.modal('hide'));
+                    }
+                };
+
+            Object.assign(params, { '$close': resolve });
+
+            $el.appendTo(document.body);
+            ko.applyBindings($vm, $el.get(0));
+
+            $el.find('.modal-body .modal-footer')
+                .appendTo($el.find('.modal-content'));
+
+            ko.tasks.schedule(() => $el.modal('show'));
+        });
     }
 };

@@ -28,6 +28,7 @@ export function component(params: IComponentOption) {
             viewModel: {
                 createViewModel: (params: any, elementRef: ElementRef) => {
                     const vm = new constructor()
+                        , $close = (params || {}).$close
                         , $disposed = vm.dispose
                         , { element } = elementRef
                         , $parent: ViewModel = ko.dataFor(element);
@@ -59,6 +60,23 @@ export function component(params: IComponentOption) {
                     Object.defineProperty(vm, '$nextTick', { value: ko.tasks.schedule });
 
                     Object.defineProperty(vm, '$forceUpdate', { value: ko.tasks.runEarly });
+
+                    Object.defineProperty(vm, '$close', {
+                        value: function close(result?: any) {
+                            const evt = 'hidden.bs.modal'
+                                , $modal = $(element).closest('.modal.show');
+
+                            if ($modal.length) {
+                                if ($close) {
+                                    $close.apply(null, [result]);
+                                }
+
+                                $modal.one(evt, () => $modal.remove());
+
+                                ko.tasks.schedule(() => $modal.modal('hide'));
+                            }
+                        }
+                    });
 
                     if (!!url) {
                         Object.defineProperty(vm, '$errors', { value: [] });
@@ -98,15 +116,16 @@ export function component(params: IComponentOption) {
 
                     Object.defineProperty(vm, '$modal', {
                         value: function modal(name: string, params?: any) {
-                            return new Promise((resolve: (result: any) => void) => {
-                                ModalApp.applyBindings(name, params, { size: 'lg' });
-                                resolve('');
-                            });
+                            return ModalApp.applyBindings(name, params, { size: 'lg' });
                         }
                     });
 
                     // call created function
                     if (typeof vm.created === 'function') {
+                        if (params && params.$close) {
+                            delete params.$close;
+                        }
+
                         vm.created.apply(vm, [params, element]);
                     }
 
