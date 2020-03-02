@@ -1,14 +1,24 @@
+<div data-bind="fbar: true">
+    <button class="btn btn-primary btn-sm" data-bind="click: () => $modal('profile')">Save</button>
+    <button class="btn btn-secondary btn-sm ml-2" data-bind="click: () => $menu.top(!$menu.top())">
+        <span>Toggle menu bar</span>
+    </button>
+</div>
+
 <pre>
     <span data-bind="text: name"></span>
     <span data-bind="text: number"></span>
     <span data-bind="date: date"></span>
 </pre>
+
 <label data-bind="label: 'Name:'"></label>
 <input type="text" data-bind="textInput: name" class="form-control mb-2" />
 <input type="text" data-bind="numberInput: number" class="form-control mb-2" />
 <input type="text" data-bind="dateInput: date" class="form-control mb-2" />
 <div data-bind="i18n: 'abc'"></div>
+
 <a href="#/profile/hoangdc">Go to profile</a>
+
 <div>
     <button class="btn btn-secondary" data-bind="click: clickTime">Click</button>
     <pre data-bind="text: ko.toJSON(times, null, 4)"></pre>

@@ -85,6 +85,11 @@ declare global {
         templateNodes: Array<HTMLElement>
     }
 
+    interface IMenu {
+        readonly top: Observable<boolean>;
+        readonly func: Observable<boolean>;
+    }
+
     interface IConfigs {
         readonly lang: ko.Computed<string>;
         readonly invalid: Symbol;

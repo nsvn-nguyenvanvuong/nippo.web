@@ -2,7 +2,7 @@ import { $, ko } from 'core/providers';
 import { router } from 'core/apps/route';
 import { RootApp, ModalApp } from 'core/apps/root';
 import { ViewModel } from 'core/apps/viewmodel';
-import { $const, updateResouces } from 'core/plugins/configs';
+import { $const, $menu, updateResouces } from 'core/plugins/configs';
 
 
 const TSLTOR = '[data-toggle="tooltip"]'
@@ -30,7 +30,7 @@ export function component(params: IComponentOption) {
                     const vm = new constructor()
                         , $close = (params || {}).$close
                         , $disposed = vm.dispose
-                        , { element } = elementRef
+                        , { element, templateNodes } = elementRef
                         , $parent: ViewModel = ko.dataFor(element);
 
                     if (!!url && !element.closest('.modal')) {
@@ -46,6 +46,8 @@ export function component(params: IComponentOption) {
                     Object.defineProperty(vm, '$el', { value: element });
 
                     Object.defineProperty(vm, '$fetch', { value: $.ajax });
+
+                    Object.defineProperty(vm, '$menu', { value: $menu });
 
                     Object.defineProperty(vm, '$const', { value: $const });
 
@@ -126,16 +128,15 @@ export function component(params: IComponentOption) {
                             delete params.$close;
                         }
 
-                        vm.created.apply(vm, [params, element]);
+                        vm.created.apply(vm, [params, element, templateNodes]);
                     }
 
                     // call mounted function
                     if (typeof vm.koDescendantsComplete === 'undefined') {
                         Object.defineProperty(vm, 'koDescendantsComplete', {
                             value: function mounted(element: HTMLElement) {
-
                                 if (typeof vm.mounted === 'function') {
-                                    vm.mounted.apply(vm, [element]);
+                                    vm.mounted.apply(vm, [element, templateNodes]);
                                 }
 
                                 // need to be enabled manually [tooltip] & [popover]
@@ -183,6 +184,10 @@ export function component(params: IComponentOption) {
                             // need to be disable manually [tooltip] & [popover]
                             $(TSLTOR).tooltip('dispose');
                             $(PSLTOR).popover('dispose');
+
+                            if (!!url && $(element).find('.function-area').length) {
+                                $menu.func(false);
+                            }
                         }
                     });
 

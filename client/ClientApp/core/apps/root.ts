@@ -52,7 +52,7 @@ class RootViewModel extends ViewModel {
         vm.router.bootstrap();
 
         if (!view.getAttribute('class')) {
-            view.setAttribute('class', 'container-fluid');
+            view.setAttribute('class', 'container-fluid p-3');
         }
 
         view.setAttribute('data-bind', `component: { name: router, params }`);

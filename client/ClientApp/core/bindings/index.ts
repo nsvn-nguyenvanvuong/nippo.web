@@ -1,3 +1,5 @@
+import './fbar';
+
 import './click';
 
 import './label';

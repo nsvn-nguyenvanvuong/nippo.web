@@ -4,6 +4,8 @@ export abstract class ViewModel implements IViewModel {
 
     public readonly $el!: HTMLElement;
 
+    public readonly $menu!: IMenu;
+
     public readonly $const!: IConfigs;
 
     public readonly $root!: ViewModel;
