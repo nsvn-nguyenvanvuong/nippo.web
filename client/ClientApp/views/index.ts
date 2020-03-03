@@ -3,4 +3,6 @@ import { Page404ViewModel } from './404';
 
 import { ProfileViewModel } from './profile';
 
-export default [Page404ViewModel, HomeViewModel, ProfileViewModel];
+import { CustomerViewModel } from './customer';
+
+export default [Page404ViewModel, HomeViewModel, ProfileViewModel, CustomerViewModel];

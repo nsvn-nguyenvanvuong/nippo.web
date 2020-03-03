@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-3">
+        <ul class="list-group" data-bind="foreach: dataSources">
+            <li class="list-group-item" data-bind="click: (customer) => $component.selectCustomer(customer)">
+                <span data-bind="text: $data.id"></span>
+                <span data-bind="text: $data.name"></span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <label data-bind="label: 'id'"></label>
+        <input type="text" class="form-control mb-2" data-bind="value: model.id" />
+        
+        <label data-bind="label: 'name'"></label>
+        <input type="text" class="form-control mb-2" data-bind="value: model.name" />
+        
+        <label data-bind="label: 'gender'"></label>
+        <input type="text" class="form-control mb-2" data-bind="value: model.gender" />
+        
+        <label data-bind="label: 'address'"></label>
+        <input type="text" class="form-control mb-2" data-bind="value: model.address" />
+    </div>
+</div>
