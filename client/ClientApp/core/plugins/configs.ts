@@ -32,10 +32,10 @@ export function updateResouces($resources: IResources) {
 
 export const $const = Object.defineProperties({}, {
     lang: {
-        value: ko.computed(() => ko.toJS(lang))
+        value: lang
     },
     langs: {
-        value: ko.computed(() => ko.toJS(langs))
+        value: langs
     },
     invalid: {
         value: INVALID

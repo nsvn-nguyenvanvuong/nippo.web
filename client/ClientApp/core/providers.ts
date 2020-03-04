@@ -6,4 +6,4 @@ import * as moment from 'moment';
 
 delete window._;
 
-export { _, $, ko, moment };
+export { _, $, ko, moment }; 

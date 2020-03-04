@@ -4,7 +4,6 @@ import { RootApp, ModalApp } from 'core/apps/root';
 import { ViewModel } from 'core/apps/viewmodel';
 import { $const, $menu, updateResouces } from 'core/plugins/configs';
 
-
 const TSLTOR = '[data-toggle="tooltip"]'
     , PSLTOR = '[data-toggle="popover"]'
     , DSLTOR = '.dropdown [data-toggle="false"]';
@@ -139,25 +138,25 @@ export function component(params: IComponentOption) {
                                     vm.mounted.apply(vm, [element, templateNodes]);
                                 }
 
-                                // need to be enabled manually [tooltip] & [popover]
-                                vm.$nextTick(() => {
-                                    $(TSLTOR).tooltip();
-                                    $(PSLTOR).popover();
-                                });
-
-                                $(DSLTOR).on('click', (evt: Event) => evt.stopPropagation());
-
-                                // hide all data-bind of ko
-                                $(element)
-                                    .removeAttr('data-bind')
-                                    .find('[data-bind]')
-                                    .removeAttr('data-bind');
-
                                 if (element.tagName === name.toUpperCase()) {
                                     if (!element.classList.contains('d-block')) {
                                         element.classList.add('d-inline-block');
                                     }
                                 }
+
+                                $(DSLTOR).on('click', (evt: Event) => evt.stopPropagation());
+
+                                // need to be enabled manually [tooltip] & [popover]
+                                vm.$nextTick(() => {
+                                    $(TSLTOR).tooltip();
+                                    $(PSLTOR).popover();
+
+                                    // hide all data-bind of ko
+                                    $(element)
+                                        .removeAttr('data-bind')
+                                        .find('[data-bind]')
+                                        .removeAttr('data-bind');
+                                });
                             }
                         });
                     }

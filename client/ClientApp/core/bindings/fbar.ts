@@ -33,6 +33,6 @@ export class FuncBarBindingHandler implements ko.BindingHandler {
 
         $menu.func.valueHasMutated();
 
-        $funcbar.addClass('function-area px-3 py-1 bg-white border-bottom fixed-top');
+        $funcbar.addClass('function-area px-3 py-1 bg-white border-bottom fixed-top shadow-sm');
     }
 }

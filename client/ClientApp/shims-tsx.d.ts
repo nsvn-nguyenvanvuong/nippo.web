@@ -112,6 +112,10 @@ declare global {
         readonly $valid: boolean;
         readonly $validate: () => Promise<boolean>;
     }
+
+    interface IUseOption {
+        install: () => void;
+    }
 }
 
 declare module 'knockout' {
@@ -122,4 +126,6 @@ declare module 'knockout' {
     interface ObservableExtenderOptions<T> {
         logChange: string;
     }
+
+    const use: (options: IUseOption) => void;
 }
