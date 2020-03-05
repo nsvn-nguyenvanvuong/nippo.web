@@ -1,6 +1,6 @@
-import { $, ko } from 'core/providers';
+import { _, $, ko } from 'core/providers';
 import { router } from 'core/apps/route';
-import { RootApp, ModalApp } from 'core/apps/root';
+import { RootApp } from 'core/apps/root';
 import { $const, $menu, updateResouces } from 'core/plugins/configs';
 
 const TSLTOR = '[data-toggle="tooltip"]'
@@ -26,10 +26,10 @@ export function component(params: IComponentOption) {
             viewModel: {
                 createViewModel: (params: any, elementRef: ElementRef) => {
                     const vm = new constructor()
-                        , $close = (params || {}).$close
                         , $disposed = vm.dispose
                         , { element, templateNodes } = elementRef
-                        , $parent: any = ko.dataFor(element);
+                        , $parent: any = ko.dataFor(element)
+                        , mixins: IMixinOption[] = (ko.mixin as any)['__mixeds'];
 
                     if (!!url && !element.closest('.modal')) {
                         router.title(title);
@@ -43,12 +43,6 @@ export function component(params: IComponentOption) {
 
                     Object.defineProperty(vm, '$el', { value: element });
 
-                    Object.defineProperty(vm, '$fetch', { value: $.ajax });
-
-                    Object.defineProperty(vm, '$menu', { value: $menu });
-
-                    Object.defineProperty(vm, '$const', { value: $const });
-
                     Object.defineProperty(vm, '$router', { value: router.goto });
 
                     Object.defineProperty(vm, '$root', { value: RootApp });
@@ -60,23 +54,6 @@ export function component(params: IComponentOption) {
                     Object.defineProperty(vm, '$nextTick', { value: ko.tasks.schedule });
 
                     Object.defineProperty(vm, '$forceUpdate', { value: ko.tasks.runEarly });
-
-                    Object.defineProperty(vm, '$close', {
-                        value: function close(result?: any) {
-                            const evt = 'hidden.bs.modal'
-                                , $modal = $(element).closest('.modal.show');
-
-                            if ($modal.length) {
-                                if ($close) {
-                                    $close.apply(null, [result]);
-                                }
-
-                                $modal.one(evt, () => $modal.remove());
-
-                                ko.tasks.schedule(() => $modal.modal('hide'));
-                            }
-                        }
-                    });
 
                     if (!!url) {
                         Object.defineProperty(vm, '$errors', { value: [] });
@@ -114,17 +91,13 @@ export function component(params: IComponentOption) {
                         }
                     });
 
-                    Object.defineProperty(vm, '$modal', {
-                        value: function modal(name: string, params?: any) {
-                            return ModalApp.applyBindings(name, params, { size: 'lg' });
-                        }
-                    });
-
                     // call created function
                     if (typeof vm.created === 'function') {
-                        if (params && params.$close) {
-                            delete params.$close;
-                        }
+                        _.each(mixins, (mix) => {
+                            if (typeof mix.created === "function") {
+                                (mix.created as any).apply(vm, [params, element, templateNodes]);
+                            }
+                        });
 
                         vm.created.apply(vm, [params, element, templateNodes]);
                     }
@@ -133,6 +106,12 @@ export function component(params: IComponentOption) {
                     if (typeof vm.koDescendantsComplete === 'undefined') {
                         Object.defineProperty(vm, 'koDescendantsComplete', {
                             value: function mounted(element: HTMLElement) {
+                                _.each(mixins, (mix) => {
+                                    if (typeof mix.mounted === "function") {
+                                        (mix.mounted as any).apply(vm, [element, templateNodes]);
+                                    }
+                                });
+
                                 if (typeof vm.mounted === 'function') {
                                     vm.mounted.apply(vm, [element, templateNodes]);
                                 }
@@ -163,6 +142,12 @@ export function component(params: IComponentOption) {
                     // call destroyed function
                     Object.defineProperty(vm, 'dispose', {
                         value: function dispose() {
+                            _.each(mixins, (mix) => {
+                                if (typeof mix.destroyed === "function") {
+                                    (mix.destroyed as any).apply(vm, []);
+                                }
+                            });
+
                             if (typeof $disposed === 'function') {
                                 $disposed.apply(vm, []);
                             }

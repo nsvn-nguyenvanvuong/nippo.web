@@ -1,9 +1,9 @@
 import { ko } from 'core/providers';
 
-const mixins: Array<{ [key: string]: any }> = [];
-
-ko.use({
-    install: function () {
-
+Object.defineProperty(ko, 'mixin', {
+    value: function mixin(mixed: IMixinOption) {
+        (ko.mixin as any)['__mixeds'].push(mixed);
     }
 });
+
+Object.defineProperty(ko.mixin, '__mixeds', { value: [] });

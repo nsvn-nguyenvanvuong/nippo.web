@@ -1,7 +1,7 @@
 import './prototype';
 
-import './plugins/api';
-import './plugins/i18n';
+import './plugins';
+
 import './bindings';
 import './components';
 import './extenders';

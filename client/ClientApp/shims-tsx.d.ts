@@ -104,6 +104,12 @@ declare global {
         [key: string]: string;
     }
 
+    interface IMixinOption {
+        created?: (() => void) | ((params: any) => void) | ((params: any, element: HTMLElement) => void) | ((params: any, element: HTMLElement, templateNodes: HTMLElement[]) => void);
+        mounted?: (() => void) | ((element: HTMLElement) => void) | ((element: HTMLElement, templateNodes: HTMLElement[]) => void);
+        destroyed?: (() => void);
+    }
+
     interface IViewModel {
         new(): IViewModel;
         readonly $fetch: IFetch;
@@ -149,6 +155,8 @@ declare module 'knockout' {
     }
 
     const use: (options: IUseOption) => void;
+
+    const mixin: (mixed: IMixinOption) => void;
 
     const ViewModel: IViewModel;
 }

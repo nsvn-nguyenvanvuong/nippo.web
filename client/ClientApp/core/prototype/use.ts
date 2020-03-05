@@ -4,7 +4,7 @@ const listHash: number[] = [];
 
 Object.defineProperty(ko, 'use', {
     value: function use(option: IUseOption) {
-        const $hash = `${option}`
+        const $hash = `${option.install}`
             .split('')
             .reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a }, 0);
 
