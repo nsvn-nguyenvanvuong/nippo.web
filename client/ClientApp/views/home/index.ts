@@ -29,6 +29,8 @@ export class HomeViewModel extends ko.ViewModel {
         const vm = this
             , time = Date.now();
 
+        vm.$window.mode
+
         vm.times.push(time);
     }
 

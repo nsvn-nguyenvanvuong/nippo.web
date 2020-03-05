@@ -1,8 +1,10 @@
-<div data-bind="fbar: true">
-    <button class="btn btn-primary btn-sm" data-bind="click: () => $modal('profile')">Save</button>
-    <button class="btn btn-secondary btn-sm ml-2" data-bind="click: () => $menu.top(!$menu.top())">
-        <span>Toggle menu bar</span>
-    </button>
+<div data-bind="if: $window.mode() === 'view'">
+    <div data-bind="fbar: true">
+        <button class="btn btn-primary btn-sm" data-bind="click: () => $modal('home')">Save</button>
+        <button class="btn btn-secondary btn-sm ml-2" data-bind="click: () => $menu.top(!$menu.top())">
+            <span>Toggle menu bar</span>
+        </button>
+    </div>
 </div>
 
 <pre>

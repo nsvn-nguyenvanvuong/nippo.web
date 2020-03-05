@@ -1,7 +1,8 @@
 import { $, ko } from 'core/providers';
 import { router, params } from 'core/apps/route';
 
-class RootViewModel  {
+class RootViewModel {
+    public mode: ko.Observable<string> = ko.observable('view');
     public router: IRouter = router;
     public params: Observable<IParams | null> = params;
 
@@ -94,6 +95,7 @@ export const ModalApp = {
                 , $vm = {
                     name,
                     params,
+                    mode: ko.observable('modal'),
                     $close: function () {
                         const evt = 'hidden.bs.modal';
 

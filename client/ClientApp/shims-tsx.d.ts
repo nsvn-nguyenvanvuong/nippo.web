@@ -15,6 +15,12 @@ declare global {
     interface ObservableArray<T = any> extends _ObservableArray<T> {
     }
 
+    interface ReadonlyObservable<T = any> extends ko.ObservableFunctions<T> {
+        (): T;
+    }
+    interface ReadonlyObservableArray<T = any> extends ReadonlyObservable<T[]>, ko.ObservableArrayFunctions<T> {
+    }
+
     interface IComponent {
         url?: string;
         name: string;
@@ -92,7 +98,7 @@ declare global {
     }
 
     interface IConfigs {
-        readonly lang: ko.Computed<string>;
+        readonly lang: ko.Observable<string>;
         readonly invalid: Symbol;
         readonly startTime: number;
     }
@@ -111,6 +117,14 @@ declare global {
         destroyed?: (() => void);
     }
 
+    interface IWindow {
+        readonly width: ReadonlyObservable<number>;
+        readonly height: ReadonlyObservable<number>;
+        readonly scrollX: ReadonlyObservable<number>;
+        readonly scrollY: ReadonlyObservable<number>;
+        readonly mode: ReadonlyObservable<'view' | 'modal'>;
+    }
+
     interface IViewModel {
         new(): IViewModel;
         readonly $fetch: IFetch;
@@ -121,6 +135,8 @@ declare global {
         readonly $menu: IMenu;
 
         readonly $const: IConfigs;
+
+        readonly $window: IWindow;
 
         readonly $root: IViewModel;
 
