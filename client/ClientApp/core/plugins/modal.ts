@@ -5,7 +5,7 @@ ko.use({
     install: () => {
         ko.mixin({
             created(params: any, element: HTMLElement) {
-                const vm = this
+                const vm: IViewModel = this as any
                     , $close = (params || {}).$close;
 
                 if (params && params.$close) {

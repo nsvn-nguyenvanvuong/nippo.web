@@ -3,6 +3,7 @@ import { lang, langs, resources } from 'core/plugins/configs';
 import { handler, component } from 'core/decorators';
 
 import { storage } from 'core/storage';
+import { updateResouces } from 'core/plugins/configs';
 
 const LK = 'lang';
 
@@ -84,3 +85,18 @@ export class LanguagesComponent extends ko.ViewModel {
         return ko.toJS(lang) === ko.toJS(lg);
     }
 }
+
+ko.use({
+    install: () => {
+        ko.mixin({
+            created() {
+                const vm: IViewModel = this as any
+                    , resources = vm.$options.resources;
+
+                if (!!resources) {
+                    updateResouces(resources);
+                }
+            }
+        })
+    }
+});

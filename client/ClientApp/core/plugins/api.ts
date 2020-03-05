@@ -19,7 +19,7 @@ ko.use({
 
         ko.mixin({
             created() {
-                const vm = this;
+                const vm: IViewModel = this as any;
 
                 Object.defineProperty(vm, '$fetch', { value: $.ajax });
             }

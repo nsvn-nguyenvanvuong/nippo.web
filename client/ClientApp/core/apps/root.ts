@@ -1,5 +1,4 @@
 import { $, ko } from 'core/providers';
-import { $const } from 'core/plugins/configs';
 import { router, params } from 'core/apps/route';
 
 class RootViewModel  {

@@ -74,6 +74,7 @@ declare global {
         name: string;
         template: string;
         resources?: IResources;
+        mixins?: IMixinOption[];
     }
 
     interface ComponentConstructor {
@@ -126,6 +127,8 @@ declare global {
         readonly $parent: IViewModel;
 
         readonly $children: IViewModel[];
+
+        readonly $options: IComponentOption;
 
         readonly $valid: boolean;
 
