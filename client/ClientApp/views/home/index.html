@@ -7,6 +7,12 @@
     </div>
 </div>
 
+<div data-bind="if: $window.mode() === 'modal'">
+    <div class="modal-header py-2 shadow-sm">
+        <button class="btn btn-primary btn-sm" data-bind="click: () => $close()">Close</button>
+    </div>
+</div>
+
 <pre>
     <span data-bind="text: name"></span>
     <span data-bind="text: number"></span>

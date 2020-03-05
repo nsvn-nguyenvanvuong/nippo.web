@@ -34,6 +34,18 @@ ko.use({
                         }
                     }
                 });
+            },
+            mounted(element: HTMLElement) {
+                const vm: IViewModel = this as any;
+
+                if (vm.$window.mode() === 'modal') {
+                    const $element = $(element)
+                        , $header = $element.find('.modal-header')
+                        , $footer = $element.find('.modal-footer');
+
+                    $footer.insertAfter(element);
+                    $header.insertBefore(element);
+                }
             }
         });
     }
