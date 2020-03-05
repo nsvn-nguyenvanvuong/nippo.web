@@ -1,16 +1,8 @@
-<div data-bind="if: $window.mode() === 'view'">
-    <div data-bind="fbar: true">
-        <button class="btn btn-primary btn-sm" data-bind="click: () => $modal('home')">Save</button>
-        <button class="btn btn-secondary btn-sm ml-2" data-bind="click: () => $menu.top(!$menu.top())">
-            <span>Toggle menu bar</span>
-        </button>
-    </div>
-</div>
-
-<div data-bind="if: $window.mode() === 'modal'">
-    <div class="modal-header py-2 shadow-sm">
-        <button class="btn btn-primary btn-sm" data-bind="click: () => $close()">Close</button>
-    </div>
+<div data-bind="fbar: true">
+    <button class="btn btn-primary btn-sm" data-bind="click: () => $modal('home')">Save</button>
+    <button class="btn btn-secondary btn-sm ml-2" data-bind="click: () => $menu.top(!$menu.top())">
+        <span>Toggle menu bar</span>
+    </button>
 </div>
 
 <pre>

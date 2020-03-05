@@ -10,7 +10,7 @@ import { $menu } from 'core/plugins/configs';
     bindingName: 'fbar'
 })
 export class FuncBarBindingHandler implements ko.BindingHandler {
-    init(element: HTMLElement, valueAccessor: () => ko.Observable<boolean>) {
+    init(element: HTMLElement, valueAccessor: () => ko.Observable<boolean>, __: ko.AllBindings, viewModel: IViewModel) {
         const $funcbar = $(element)
             , showFbar = ko.toJS(valueAccessor())
             , subscribe = $menu.func.subscribe(func => {
@@ -29,10 +29,14 @@ export class FuncBarBindingHandler implements ko.BindingHandler {
                 }
             });
 
-        $menu.func(showFbar);
+        if (viewModel.$window.mode() === 'modal') {
+            $funcbar.addClass('modal-header d-block px-3 py-1 bg-white border-bottom shadow-sm')
+        } else {
+            $menu.func(showFbar);
 
-        $menu.func.valueHasMutated();
+            $menu.func.valueHasMutated();
 
-        $funcbar.addClass('function-area px-3 py-1 bg-white border-bottom fixed-top shadow-sm');
+            $funcbar.addClass('function-area d-block px-3 py-1 bg-white border-bottom fixed-top shadow-sm');
+        }
     }
 }
