@@ -1,6 +1,5 @@
 import { _, ko } from 'core/providers';
 import { component } from 'core/decorators';
-import { ViewModel } from 'core/apps/viewmodel';
 
 @component({
     name: "customer",
@@ -8,7 +7,7 @@ import { ViewModel } from 'core/apps/viewmodel';
     title: "customer",
     template: require('./index.html')
 })
-export class CustomerViewModel extends ViewModel {
+export class CustomerViewModel extends ko.ViewModel {
     model: Customer = new Customer();
     dataSources: ko.ObservableArray<Customer> = ko.observableArray([] as Customer[]);
 

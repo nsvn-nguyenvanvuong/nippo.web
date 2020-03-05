@@ -1,12 +1,11 @@
-import { $ } from 'core/providers';
+import { $, ko } from 'core/providers';
 import { component } from 'core/decorators';
-import { ViewModel } from 'core/apps/viewmodel';
 
 @component({
     name: "nav-bar",
     template: require("./index.html")
 })
-export class NarBarViewModel extends ViewModel {
+export class NarBarViewModel extends ko.ViewModel {
     private subscribe!: ko.Subscription;
 
     public created() {

@@ -1,7 +1,6 @@
 import { $, ko } from 'core/providers';
 import { router } from 'core/apps/route';
 import { RootApp, ModalApp } from 'core/apps/root';
-import { ViewModel } from 'core/apps/viewmodel';
 import { $const, $menu, updateResouces } from 'core/plugins/configs';
 
 const TSLTOR = '[data-toggle="tooltip"]'
@@ -30,7 +29,7 @@ export function component(params: IComponentOption) {
                         , $close = (params || {}).$close
                         , $disposed = vm.dispose
                         , { element, templateNodes } = elementRef
-                        , $parent: ViewModel = ko.dataFor(element);
+                        , $parent: any = ko.dataFor(element);
 
                     if (!!url && !element.closest('.modal')) {
                         router.title(title);

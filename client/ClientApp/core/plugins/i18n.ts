@@ -3,7 +3,6 @@ import { lang, langs, resources } from 'core/plugins/configs';
 import { handler, component } from 'core/decorators';
 
 import { storage } from 'core/storage';
-import { ViewModel } from 'core/apps/viewmodel';
 
 const LK = 'lang';
 
@@ -74,7 +73,7 @@ export class I18nBinding implements ko.BindingHandler {
             }"></button>
     </div>`
 })
-export class LanguagesComponent extends ViewModel {
+export class LanguagesComponent extends ko.ViewModel {
     languages = langs;
 
     public changeLg(lg: string) {

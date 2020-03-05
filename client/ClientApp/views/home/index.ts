@@ -1,6 +1,5 @@
 import { ko } from 'core/providers';
 import { component } from 'core/decorators';
-import { ViewModel } from 'core/apps/viewmodel';
 
 @component({
     name: "home",
@@ -18,7 +17,7 @@ import { ViewModel } from 'core/apps/viewmodel';
         }
     }
 })
-export class HomeViewModel extends ViewModel {
+export class HomeViewModel extends ko.ViewModel {
     name = ko.observable('Hello world!').extend({ logChange: 'first name:' });
 
     number = ko.observable(100);

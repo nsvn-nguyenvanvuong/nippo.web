@@ -105,12 +105,33 @@ declare global {
     }
 
     interface IViewModel {
+        new(): IViewModel;
+        readonly $fetch: IFetch;
+        readonly $router: IGoto;
+
         readonly $el: HTMLElement;
+
+        readonly $menu: IMenu;
+
         readonly $const: IConfigs;
+
+        readonly $root: IViewModel;
+
         readonly $parent: IViewModel;
+
         readonly $children: IViewModel[];
+
         readonly $valid: boolean;
+
         readonly $validate: () => Promise<boolean>;
+
+        readonly $modal: (name: string, params?: any) => Promise<any>;
+
+        readonly $close: (result?: any) => void;
+
+        readonly $forceUpdate: () => void;
+
+        readonly $nextTick: (callback: () => void) => number;
     }
 
     interface IUseOption {
@@ -128,4 +149,6 @@ declare module 'knockout' {
     }
 
     const use: (options: IUseOption) => void;
+
+    const ViewModel: IViewModel;
 }
