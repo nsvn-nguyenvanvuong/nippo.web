@@ -1,6 +1,5 @@
-import { _, $, ko } from 'core/providers';
+import { _, ko } from 'core/providers';
 import { router } from 'core/apps/route';
-import { RootApp } from 'core/apps/root';
 
 export function component(options: IComponentOption) {
     const { url, name } = options
