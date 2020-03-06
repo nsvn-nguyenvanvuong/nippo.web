@@ -87,7 +87,8 @@ module.exports = (env) => ({
     },
     plugins: [
         new CopyWebpackPlugin([
-            { from: './ClientApp/index.html', to: '../index.html' }
+            { from: './ClientApp/index.html', to: '../index.html' },
+            { from: './ClientApp/favicon.ico', to: '../favicon.ico' }
         ]),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
@@ -110,7 +111,7 @@ module.exports = (env) => ({
         useLocalIp: true,
         watchContentBase: true,
         index: './index.htm',
-        contentBase: path.join(__dirname, 'wwwroot'),
+        contentBase: path.join(__dirname, 'ClientApp'),
         historyApiFallback: true
     }
 });
