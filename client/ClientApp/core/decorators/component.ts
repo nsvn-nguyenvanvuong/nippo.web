@@ -46,10 +46,6 @@ export function component(options: IComponentOption) {
 
                     Object.defineProperty(vm, '$options', { value: options });
 
-                    Object.defineProperty(vm, '$nextTick', { value: ko.tasks.schedule });
-
-                    Object.defineProperty(vm, '$forceUpdate', { value: ko.tasks.runEarly });
-
                     // call created function
                     if (typeof vm.created === 'function') {
                         _.each(mixins, (mix) => {

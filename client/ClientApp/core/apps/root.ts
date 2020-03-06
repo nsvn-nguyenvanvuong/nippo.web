@@ -1,6 +1,15 @@
 import { $, ko } from 'core/providers';
 import { router, params } from 'core/apps/route';
 
+ko.use({
+    install() {
+        ko.components.register('blank', {
+            template: '<div></div>',
+            viewModel: { createViewModel: () => ({}) }
+        });
+    }
+});
+
 class RootViewModel {
     public mode: ko.Observable<string> = ko.observable('view');
     public router: IRouter = router;
@@ -95,6 +104,7 @@ export const ModalApp = {
                 , $vm = {
                     name,
                     params,
+                    $el: $el.get(0),
                     mode: ko.observable('modal'),
                     $close: function () {
                         const evt = 'hidden.bs.modal';

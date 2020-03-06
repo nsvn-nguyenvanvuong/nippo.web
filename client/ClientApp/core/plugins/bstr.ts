@@ -7,30 +7,32 @@ const TSLTOR = '[data-toggle="tooltip"]'
 ko.use({
     install: () => {
         ko.mixin({
-            mounted(element: HTMLElement) {
-                const vm: IViewModel = this as any;
+            mounted() {
+                const vm: IViewModel = this as any
+                    , $el: JQuery<HTMLElement> = $(vm.$el);
 
-                $(element).find(DSLTOR).on('click', (evt: Event) => evt.stopPropagation());
+                $el
+                    .find(DSLTOR)
+                    .on('click', (evt: Event) => evt.stopPropagation());
 
                 // need to be enabled manually [tooltip] & [popover]
-                vm.$nextTick(() => {
-                    $(element).find(TSLTOR).tooltip();
-                    $(element).find(PSLTOR).popover();
+                ko.tasks.scheduler(() => {
+                    $el.find(TSLTOR).tooltip();
+                    $el.find(PSLTOR).popover();
 
                     // hide all data-bind of ko
-                    $(element)
-                        .removeAttr('data-bind')
-                        .find('[data-bind]')
-                        .removeAttr('data-bind');
+                    $el.removeAttr('data-bind');
+
+                    $el.find('[data-bind]').removeAttr('data-bind');
                 });
             },
             destroyed() {
                 const vm: IViewModel = this as any
-                    , element: HTMLElement = vm.$el;
+                    , $el: JQuery<HTMLElement> = $(vm.$el);
 
                 // need to be disable manually [tooltip] & [popover]
-                $(element).find(TSLTOR).tooltip('dispose');
-                $(element).find(PSLTOR).popover('dispose');
+                $el.find(TSLTOR).tooltip('dispose');
+                $el.find(PSLTOR).popover('dispose');
             }
         })
     }

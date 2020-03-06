@@ -6,12 +6,10 @@ import { component } from 'core/decorators';
     template: require("./index.html")
 })
 export class NarBarViewModel extends ko.ViewModel {
-    private subscribe!: ko.Subscription;
-
     public created() {
         const vm = this;
 
-        vm.subscribe = vm.$menu.top
+        vm.$menu.top
             .subscribe(top => {
                 if (!top) {
                     $(vm.$el)
@@ -22,7 +20,7 @@ export class NarBarViewModel extends ko.ViewModel {
                         .addClass('d-block')
                         .removeClass('d-none');
                 }
-            });
+            }).disposeWhenNodeIsRemoved(vm.$el);
     }
 
     public mounted() {
@@ -35,7 +33,5 @@ export class NarBarViewModel extends ko.ViewModel {
         const vm = this;
 
         vm.$menu.top(false);
-
-        vm.subscribe.dispose();
     }
 }

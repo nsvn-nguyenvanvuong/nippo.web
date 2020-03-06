@@ -125,8 +125,12 @@ declare global {
         readonly mode: ReadonlyObservable<'view' | 'modal'>;
     }
 
-    interface IViewModel {
+    interface IViewModelConstructor {
         new(): IViewModel;
+        extend(extend: IMixinOption): IViewModelConstructor;
+    }
+
+    interface IViewModel {
         readonly $fetch: IFetch;
         readonly $router: IGoto;
 
@@ -150,13 +154,15 @@ declare global {
 
         readonly $validate: () => Promise<boolean>;
 
-        readonly $modal: (name: string, params?: any) => Promise<any>;
+        readonly $modal: {
+            (name: string): Promise<any>;
+            (name: string, params: any): Promise<any>;
+        };
 
-        readonly $close: (result?: any) => void;
-
-        readonly $forceUpdate: () => void;
-
-        readonly $nextTick: (callback: () => void) => number;
+        readonly $close: {
+            (): void;
+            (result: any): void;
+        };
     }
 
     interface IUseOption {
@@ -165,10 +171,6 @@ declare global {
 }
 
 declare module 'knockout' {
-    interface ObservableFunctions<T> {
-        readonly vm: IViewModel;
-    }
-
     interface ObservableExtenderOptions<T> {
         logChange: string;
     }
@@ -177,5 +179,5 @@ declare module 'knockout' {
 
     const mixin: (mixed: IMixinOption) => void;
 
-    const ViewModel: IViewModel;
+    const ViewModel: IViewModelConstructor;
 }
