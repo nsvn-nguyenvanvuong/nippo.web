@@ -1,0 +1,24 @@
+<div class="mx-auto">
+    <div class="row">
+        <div class="input-group mb-3 ">
+            <input type="text" class="form-control col-3" aria-describedby="button-addon2" data-bind="value: param">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-bind="click: search">Search</button>
+            </div>
+          </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-3 mb-3">
+            <ul class="list-group" data-bind="foreach: dataSources">
+                <li class="list-group-item">
+                    <div class="col">
+                        <span data-bind="text: $data.id"></span>
+                        <span data-bind="text: $data.name"></span>
+                        <samp data-bind="text: $data.amount"></samp>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

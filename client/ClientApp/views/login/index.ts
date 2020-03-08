@@ -58,4 +58,8 @@ class User {
         this.username(param.username);
         this.password(param.password)
     }
+
+    public removeUser(){
+        
+    }
 }
