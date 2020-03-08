@@ -23,7 +23,7 @@ export class SafeClickBindingHandler implements ko.BindingHandler {
 
                     if (time > $timeClick) {
                         //pass through the arguments
-                        originalFunction.apply(viewModel, arguments);
+                        originalFunction.apply(viewModel, [...arguments]);
                     }
 
                     lastPreventTime = new Date().getTime();

@@ -34,6 +34,12 @@ export class HomeViewModel extends ko.ViewModel {
         vm.times.push(time);
     }
 
+    gotoCustomer(){
+        const vm = this;
+
+        vm.$router('customer', { id: 99, name: 'ChungNT'});
+    }
+
     created() {
         this.$fetch('https://jsonplaceholder.typicode.com/posts/42', {
             method: 'GET',

@@ -3,7 +3,7 @@ import { component } from 'core/decorators';
 
 @component({
     name: "customer",
-    url: '/customer',
+    url: '/customer/:id',
     title: "customer",
     template: require('./index.html')
 })
@@ -11,10 +11,10 @@ export class CustomerViewModel extends ko.ViewModel {
     model: Customer = new Customer();
     dataSources: ko.ObservableArray<Customer> = ko.observableArray([] as Customer[]);
 
-    public created() {
+    public created(params: { id: string | number; }) {
         const vm = this
             , ds: Customer[] = [];
-
+            console.log(params);
         for (let i = 0; i <= 9; i++) {
             ds.push(new Customer({
                 id: i,

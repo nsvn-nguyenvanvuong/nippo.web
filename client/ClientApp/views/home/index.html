@@ -17,8 +17,8 @@
 <input type="text" data-bind="dateInput: date" class="form-control mb-2" />
 <div data-bind="i18n: 'abc'"></div>
 
-<a href="#/profile/hoangdc">Go to profile</a>
-
+<a href="#/customer/1">Go to customer</a>
+<button class="btn btn-primary" data-bind="click: gotoCustomer" ></button>
 <div>
     <button class="btn btn-secondary" data-bind="click: clickTime">Click</button>
     <pre data-bind="text: ko.toJSON(times, null, 4)"></pre>
