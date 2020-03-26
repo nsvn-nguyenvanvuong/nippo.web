@@ -3,6 +3,11 @@
         "**/.classpath": true,
         "**/.project": true,
         "**/.settings": true,
-        "**/.factorypath": true
+        "**/.factorypath": true,
+        "**/.gradle": true,
+        "**/bin": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/node_modules": true
     }
 }
