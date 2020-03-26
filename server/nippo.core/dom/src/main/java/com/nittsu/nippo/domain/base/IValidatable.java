@@ -1,5 +1,5 @@
 package com.nittsu.nippo.domain.base;
 
-public interface IValidatable {    
+public interface IValidatable {
     void validate();
 }

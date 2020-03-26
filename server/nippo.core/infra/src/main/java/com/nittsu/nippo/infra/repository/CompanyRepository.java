@@ -20,6 +20,7 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
 		comEtt.companyName = company.getCompanyName();
 
 		EntityManager manager = this.getEntityManager();
+		
 		manager.persist(comEtt);
 	}
 
@@ -27,13 +28,17 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
 	public void update(Company company) {
 		EntityManager manager = this.getEntityManager();
 		CompanyEntity comEtt = manager.find(CompanyEntity.class, company.getCompanyCode());
+
 		comEtt.companyName = company.getCompanyName();
+		
+		manager.persist(comEtt);
 	}
 
 	@Override
 	public void remove(Company company) {
 		EntityManager manager = this.getEntityManager();
 		CompanyEntity comEtt = manager.find(CompanyEntity.class, company.getCompanyCode());
+
 		manager.remove(comEtt);
 	}
 
@@ -41,12 +46,14 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
 	public Company find(String companyCode) {
 		EntityManager manager = this.getEntityManager();
 		Company comEtt = manager.find(Company.class, companyCode);
+
 		return new Company(comEtt.getCompanyCode(), comEtt.getCompanyName());
 	}
 
 	@Override
 	public List<Company> findAll() {
 		EntityManager manager = this.getEntityManager();
+
 		return manager.createQuery("SELECT c FROM CompanyEntity c", CompanyEntity.class).getResultList().stream()
 				.map(entity -> {
 					Company domain = new Company();
