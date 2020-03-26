@@ -8,7 +8,7 @@
  */
 
 include 'nippo.web'
+include 'nippo.core:ws'
 include 'nippo.core:app'
 include 'nippo.core:dom'
 include 'nippo.core:infra'
-include 'nippo.core:ws'

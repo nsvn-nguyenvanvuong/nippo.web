@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.HttpMethod;
 
 public class CrossRequestFilter implements Filter {
-
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		
@@ -28,6 +27,7 @@ public class CrossRequestFilter implements Filter {
 		if (httpRequest.getHeader("origin") != null) {
 			
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
+
 			httpResponse.addHeader("Access-Control-Allow-Origin", httpRequest.getHeader("origin"));
 			httpResponse.addHeader("Access-Control-Allow-Headers", "X-Requested-With, origin, content-type, accept, authorization, MOBILE");
 			httpResponse.addHeader("Access-Control-Allow-Credentials", "true");
@@ -35,6 +35,7 @@ public class CrossRequestFilter implements Filter {
 			
 			if (httpRequest.getMethod().equals(HttpMethod.OPTIONS)) {
 				httpResponse.setStatus(HttpServletResponse.SC_ACCEPTED);
+
 				return;
 			}
 		}
@@ -46,5 +47,4 @@ public class CrossRequestFilter implements Filter {
 	public void destroy() {
 		
 	}
-
 }
