@@ -7,8 +7,8 @@
  * in the user manual at https://docs.gradle.org/6.0.1/userguide/multi_project_builds.html
  */
 
-include 'nippo.web'
-include 'nippo.core:ws'
-include 'nippo.core:app'
-include 'nippo.core:dom'
-include 'nippo.core:infra'
+include 'nippo.webapp'
+include 'nippo.core:webservice'
+include 'nippo.core:application'
+include 'nippo.core:domain'
+include 'nippo.core:infrastructure'

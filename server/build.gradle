@@ -27,7 +27,7 @@ allprojects {
 			url "https://jetbrains.bintray.com/pty4j"
 		}
 		flatDir {
-			dirs "${project(':nippo.web').projectDir}/../gradle/libs"
+			dirs "${rootDir}/gradle/libs"
 		}
 	}
 
@@ -80,8 +80,8 @@ subprojects {
 		implementation 'com.fasterxml.jackson.core:jackson-core:2.8.4'
 		implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.4'
 
-		// implementation 'nts.gul:nts.gul:1.0.0'
-		// implementation 'nts.arc:nts.arc:1.0.0'
+		implementation 'nts.gul:nts.gul'
+		implementation 'nts.arc:nts.arc'
 
 		// spa authentication
 		// implementation 'com.auth0:java-jwt:3.3.0'
@@ -89,31 +89,31 @@ subprojects {
 	}
 }
 
-project (':nippo.core:ws') {
+project (':nippo.core:webservice') {
 	dependencies {
-		implementation project (':nippo.core:app')
+		implementation project (':nippo.core:application')
 	}
 }
 
-project (':nippo.core:app') {
+project (':nippo.core:application') {
 	dependencies {
-		implementation project (':nippo.core:dom')
-		implementation project (':nippo.core:infra')
+		implementation project (':nippo.core:domain')
+		implementation project (':nippo.core:infrastructure')
 	}
 }
 
-project (':nippo.core:dom') {
+project (':nippo.core:domain') {
 	dependencies {
 	}
 }
 
-project (':nippo.core:infra') {
+project (':nippo.core:infrastructure') {
 	dependencies {
-		implementation project (':nippo.core:dom')
+		implementation project (':nippo.core:domain')
 	}
 }
 
-project (':nippo.web') {
+project (':nippo.webapp') {
 	apply plugin: 'war'
 	
 	war {
@@ -121,9 +121,9 @@ project (':nippo.web') {
 	}
 	
 	dependencies {
-		runtimeOnly project (':nippo.core:ws')
-		runtimeOnly project (':nippo.core:app')
-		runtimeOnly project (':nippo.core:dom')
-		runtimeOnly project (':nippo.core:infra')
+		runtimeOnly project (':nippo.core:webservice')
+		runtimeOnly project (':nippo.core:application')
+		runtimeOnly project (':nippo.core:domain')
+		runtimeOnly project (':nippo.core:infrastructure')
 	}
 }

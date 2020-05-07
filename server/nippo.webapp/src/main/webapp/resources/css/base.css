@@ -1,0 +1,108 @@
+/* line 15, ../sass/components/_button.scss */
+button {
+	display: inline-block;
+	background: #fff;
+	border: 1px solid #999999;
+	outline: none;
+	text-align: center;
+	letter-spacing: 0.1em;
+	white-space: nowrap;
+	position: relative;
+	cursor: pointer;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-ms-border-radius: 3px;
+}
+/* line 29, ../sass/components/_button.scss */
+button:hover {
+	background-color: #f2f2f2;
+}
+/* line 33, ../sass/components/_button.scss */
+button[disabled] {
+	background-color: #d9d9d9;
+	cursor: default;
+	color: #888888;
+}
+
+/* line 97, ../sass/components/_button.scss */
+button {
+	color: #404040;
+	font-size: 13px;
+	font-family: "Meiryo UI";
+	top: 0;
+	height: 30px;
+	padding: 3px 7px;
+	margin-bottom: 3px;
+	box-shadow: 0 3px rgba(0, 0, 0, 0.4);
+	overflow: visible;
+}
+/* line 125, ../sass/components/_button.scss */
+button:focus {
+	border-color: #0096f2;
+	box-shadow: 0 2px 2px 0 #0096f2;
+}
+/* line 128, ../sass/components/_button.scss */
+button:focus.small {
+	/* END: SAME ALL SIZES */
+	
+}
+/* line 132, ../sass/components/_button.scss */
+button:focus.large {
+	box-shadow: 0 4px #0096f2;
+	/* END: SAME ALL SIZES */
+}
+/* line 140, ../sass/components/_button.scss */
+button:focus.x-large {
+	box-shadow: 0 5px #0096f2;
+	/* END: SAME ALL SIZES */
+}
+/* line 149, ../sass/components/_button.scss */
+button:active {
+	top: 3px;
+	border-color: rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0 #999;
+}
+/* line 6, ../sass/components/_switchbutton.scss */
+button.nts-switch-button {
+	font-size: 16.8px;
+	padding: 1px 4px;
+	margin-bottom: 0px;
+	box-shadow: 0 0 rgba(0, 0, 0, 0.4);
+	height: 36.6px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+/* line 36, ../sass/components/_switchbutton.scss */
+button.nts-switch-button:active {
+	top: 0;
+	box-shadow: 0 0 rgba(0, 0, 0, 0.4);
+}
+/* line 41, ../sass/components/_switchbutton.scss */
+button.nts-switch-button.selected {
+	box-shadow: 0 0 rgba(0, 0, 0, 0.4);
+	top: 0;
+	color: #fff;
+	background-color: #00B050;
+}
+/* line 49, ../sass/components/_switchbutton.scss */
+button.nts-switch-button.selected:hover {
+	color: #fff;
+	background-color: #00B050;
+}
+/* line 55, ../sass/components/_switchbutton.scss */
+button.nts-switch-button[disabled] {
+	background-color: #d9d9d9;
+}
+/* line 57, ../sass/components/_switchbutton.scss */
+button.nts-switch-button[disabled]:hover {
+	background-color: #d9d9d9;
+}
+.switchButton-wrapper {
+	display: inline-block;
+	padding: 5px 5px 5px 5px;
+}
