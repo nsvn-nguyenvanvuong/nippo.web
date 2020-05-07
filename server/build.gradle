@@ -98,7 +98,6 @@ project (':nippo.core:webservice') {
 project (':nippo.core:application') {
 	dependencies {
 		implementation project (':nippo.core:domain')
-		implementation project (':nippo.core:infrastructure')
 	}
 }
 
